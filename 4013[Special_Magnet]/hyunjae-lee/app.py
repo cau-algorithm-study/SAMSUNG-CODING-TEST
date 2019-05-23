@@ -30,32 +30,35 @@ def main():
 
         print('=== {} === '.format(i))
         for num in range(int(numOftest)):
-            testCondition.append(contents[index].rstrip())
-            index += 1
+            # testCondition.append(contents[index].rstrip())
 
             # Algorithm
             answerList = specialMagnet(first, second, third,
-                                       fourth, num, testCondition)
-            # print('#{}'.format(answer), end="\n")
-        print(answerList)
+                                       fourth, num, contents[index].rstrip())
+            print(answerList)
+            index += 1
+            first = answerList[0]
+            second = answerList[1]
+            third = answerList[2]
+            fourth = answerList[3]
         answer = checkAnswer(answerList)
         print(answer)
-    answers.append(answer)
-    print(answers)
+        answers.append(answer)
+    print('ANSWER : ', answers)
     inputfile.close()
 
 
 def specialMagnet(first, second, third, fourth, num, testCondition):
 
-    eachTestList = eachTestcase(first, second, third, fourth)
+    if num == 0:
+        eachTestList = eachTestcase(first, second, third, fourth)
+    else:
+        eachTestList = [first, second, third, fourth]
     print('init List ')
     print(eachTestList)
     print('test condition : ', testCondition)
 
-    eachTestList = execute(eachTestList, num, testCondition)
-    # print(eachTestList)
-
-    return eachTestList
+    return execute(eachTestList, num, testCondition)
 
 
 def checkAnswer(eachTestList):
@@ -74,7 +77,7 @@ def checkAnswer(eachTestList):
 
 
 def execute(eachTestList, num, testCondition):
-    eachCondition = testCondition[num].split(" ")
+    eachCondition = testCondition.split(" ")
     # print(eachCondition)
     magnet = int(eachCondition[0])
     direction = int(eachCondition[1])
